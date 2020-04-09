@@ -74,61 +74,68 @@
       </footer>
     </div>
     <script type="text/javascript">
-      let tableData = [
+      let data = [
         {
           reserveName: "banana",
           reservePhone: "6195550123",
           reserveEmail: "fake@email.com",
           reserveID: "foodGroup",
-		},
-		{
-			reserveName: "banana2",
+        },
+        {
+          reserveName: "banana2",
           reservePhone: "6195550123",
           reserveEmail: "fake@email.com",
           reserveID: "foodies",
-		},
+        },
       ];
       function runTableQuery() {
-        // Here we get the location of the root page.
-        // We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
-        var currentURL = window.location.origin;
+        // get data on tables from server
+       // $.get("/api/tables").then((data) => {
+          // create table listing for each group in the array
+          for (var i = 0; i < data.length; i++) {
+            var tableSection = $("<div>");
+            tableSection.addClass("well");
+            tableSection.attr("id", "tableWell-" + i + 1);
+            $("#tableSection").append(tableSection);
 
-        // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-        // $.ajax({url: currentURL + "/api/tables", method: "GET"})
-        // 	.done(function(tableData) {
+            var tableNumber = i + 1;
 
-        // Here we are logging the URL so we have access to it for troubleshooting
-        console.log("------------------------------------");
-        console.log("URL: " + currentURL + "/api/tables");
-        console.log("------------------------------------");
+            $("#tableWell-" + i + 1).append(
+              '<h2><span class="label label-primary">' +
+                tableNumber +
+                "</span> | " +
+                data[i].reserveID +
+                "</h2>"
+            );
+          }
+      // });
+      }
+      function runWaitingList() {
+        // get data on tables from server
+       // $.get("/api/waitList").then((data) => {
+          // create table listing for each group in the array
+          for (var i = 0; i < data.length; i++) {
+            var tableSection = $("<div>");
+            tableSection.addClass("well");
+            tableSection.attr("id", "tableWellWait-" + i + 1);
+            $("#waitlistSection").append(tableSection);
 
-        // Here we then log the NYTData to console, where it will show up as an object.
-        console.log(tableData);
-        console.log("------------------------------------");
+            var tableNumber = i + 1;
 
-        // Loop through and display each of the customers
-        for (var i = 0; i < tableData.length; i++) {
-          // Create the HTML Well (Section) and Add the table content for each reserved table
-          var tableSection = $("<div>");
-          tableSection.addClass("well");
-          tableSection.attr("id", "tableWell-" + i + 1);
-          $("#tableSection").append(tableSection);
-
-          var tableNumber = i + 1;
-
-          // Then display the remaining fields in the HTML (Section Name, Date, URL)
-          $("#tableWell-" + i + 1).append(
-            '<h2><span class="label label-primary">' +
-              tableNumber +
-              "</span> | " +
-              tableData[i].reserveID +
-              "</h2>"
-          );
-        }
+            $("#tableWellWait-" + i + 1).append(
+              '<h2><span class="label label-primary">' +
+                tableNumber +
+                "</span> | " +
+                data[i].reserveID +
+                "</h2>"
+            );
+          }
+      // });
       }
       runTableQuery();
-      // });
-      // }
+      runWaitingList();
+
+      
     </script>
   </body>
 </html>
