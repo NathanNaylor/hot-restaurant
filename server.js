@@ -11,32 +11,22 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const tables = [{
-    name: "",
-    phone: "",
-    email: "",
-    id: ""
-}, ];
-const waitList = [{
-    name: "",
-    phone: "",
-    email: "",
-    id: ""
-}, ];
+const tables = [];
+const waitList = [];
 // get request from the user
 
 // Routes
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "html/index.html"));
 });
 
-app.get("/reservations", (req, res) => {
-    res.sendFile(path.join(__dirname, "make-reservation.html"));
+app.get("/reserve", (req, res) => {
+    res.sendFile(path.join(__dirname, "html/make-reservation.html"));
 });
 
 // Displays all characters
 app.get("/tables", (req, res) => {
-    res.sendFile(path.join(__dirname, "tables.html"));
+    res.sendFile(path.join(__dirname, "html/tables.html"));
 });
 
 
